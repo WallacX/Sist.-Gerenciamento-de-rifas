@@ -5,7 +5,7 @@ from PyQt5 import uic
 from qt_material import apply_stylesheet
 
 from layouts.layout_clientes import PerfilClientes
-
+from layouts.layout_rifas import Rifas
 
 class CustomQWidget(QWidget):
     def __init__(self, icon, text, parent= None):
@@ -19,8 +19,6 @@ class CustomQWidget(QWidget):
         layout.addWidget(label_text)
         layout.addWidget(label_icon)
 
-
-
         self.setLayout(layout)
 
 
@@ -31,20 +29,34 @@ class JanelaPrincipal(QMainWindow):
 
 
         item = QListWidgetItem(self.listWidget)
-        item_widget = CustomQWidget("+", "Clientes")
+        item_widget = CustomQWidget("+","Clientes")
         item.setSizeHint(item_widget.sizeHint())
         self.listWidget.insertItem(0,item)
         self.listWidget.setItemWidget(item, item_widget)
+
+        item = QListWidgetItem(self.listWidget)
+        item_widget = CustomQWidget("+","Rifas Ativas")
+        item.setSizeHint(item_widget.sizeHint())
+        self.listWidget.insertItem(1,item)
+        self.listWidget.setItemWidget(item, item_widget)
+
+        item = QListWidgetItem(self.listWidget)
+        item_widget = CustomQWidget("+","Histórico de Rifas")
+        item.setSizeHint(item_widget.sizeHint())
+        self.listWidget.insertItem(2,item)
+        self.listWidget.setItemWidget(item, item_widget)
+
+
 
 
         self.listWidget.setCurrentRow(0)
         self.carregaJanelas()
         self.listWidget.currentRowChanged.connect(self.display)
 
-    
 
     def carregaJanelas(self):
         self.stackedWidget.addWidget(PerfilClientes())
+        self.stackedWidget.addWidget(Rifas())
 
 
     def display(self, index):
@@ -60,3 +72,5 @@ apply_stylesheet(app, theme = 'dark_teal.xml')
 window = JanelaPrincipal()
 window.show()
 app.exec()
+
+

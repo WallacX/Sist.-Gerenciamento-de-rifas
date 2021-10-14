@@ -1,24 +1,18 @@
-
-from PyQt5.QtWidgets import QHeaderView, QTableWidget, QTableWidgetItem
-
 from PyQt5.QtWidgets import QHeaderView, QTableWidget, QTableWidgetItem, QWidget, QHBoxLayout, QPushButton
 from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import Qt, QSize, QRect
+from PyQt5.QtCore import QSize
 
 import models.model_clientes as ClientesModel
-import layouts.layout_clientes as ClientesLayout
+
 
 class TabelaClientes:
     def __init__(self, tableWidget ,parent):
 
         self.tableWidget = tableWidget
         self.parent = parent
-
-
-
+        self.listaClientes= []
         self.cliente = None
 
-        self.listaClientes= []
 
 
         self.configTable()
@@ -58,7 +52,7 @@ class TabelaClientes:
 
     def delCliente(self, cliente):
         ClientesModel.delCliente(cliente.id)
-        # Carrega os dados do banco
+
         self.carregaDados()
 
     def limparClientes(self):
@@ -67,7 +61,6 @@ class TabelaClientes:
         self.parent.excluir_btn.setEnabled(False)
         self.parent.limpar_btn.setEnabled(False)
 
-
     def on_click(self):
         selected_row = self.tableWidget.currentRow() #linha selecionada
         id = self.tableWidget.item(selected_row, 0).text()
@@ -75,12 +68,10 @@ class TabelaClientes:
         self.parent.insereCliente(cliente)
         self.clienteAtual = self.listaClientes[selected_row]
 
-
     def _addRow(self, cliente):
         self.listaClientes.append(cliente)
         rowCount = self.tableWidget.rowCount()
         self.tableWidget.insertRow(rowCount)
-        
         
         id = QTableWidgetItem(str(cliente.id))
         nome = QTableWidgetItem(cliente.nome)
@@ -94,7 +85,6 @@ class TabelaClientes:
         self.tableWidget.setItem(rowCount, 3, telefone)
         self.tableWidget.setItem(rowCount, 4, email)
         self.tableWidget.setCellWidget(rowCount, 5, CustomQWidget(cliente,self))
-
 
     def limparSelecionado(self):
         self.listaClientes.remove(self.clienteAtual)
@@ -128,7 +118,4 @@ class CustomQWidget(QWidget):
 
 
     def remover(self):
-        cliente = self.cliente
-        self.parent.clienteAtual = self.cliente
-        self.parent.delCliente(cliente)
-        self.parent.limparSelecionado()
+        self.parent.delCliente(self.cliente)
