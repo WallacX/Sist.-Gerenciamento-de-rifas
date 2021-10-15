@@ -5,7 +5,8 @@ from PyQt5 import uic
 from qt_material import apply_stylesheet
 
 from layouts.layout_clientes import PerfilClientes
-from layouts.layout_rifas import Rifas
+from layouts.layout_venda import Venda
+from layouts.layout_criar import Criar
 
 class CustomQWidget(QWidget):
     def __init__(self, icon, text, parent= None):
@@ -29,7 +30,7 @@ class JanelaPrincipal(QMainWindow):
 
 
         item = QListWidgetItem(self.listWidget)
-        item_widget = CustomQWidget("+","Clientes")
+        item_widget = CustomQWidget("+","Criar")
         item.setSizeHint(item_widget.sizeHint())
         self.listWidget.insertItem(0,item)
         self.listWidget.setItemWidget(item, item_widget)
@@ -41,7 +42,7 @@ class JanelaPrincipal(QMainWindow):
         self.listWidget.setItemWidget(item, item_widget)
 
         item = QListWidgetItem(self.listWidget)
-        item_widget = CustomQWidget("+","Histórico de Rifas")
+        item_widget = CustomQWidget("+","Clientes")
         item.setSizeHint(item_widget.sizeHint())
         self.listWidget.insertItem(2,item)
         self.listWidget.setItemWidget(item, item_widget)
@@ -55,8 +56,11 @@ class JanelaPrincipal(QMainWindow):
 
 
     def carregaJanelas(self):
+        self.stackedWidget.addWidget(Criar())
+        self.stackedWidget.addWidget(Venda())
         self.stackedWidget.addWidget(PerfilClientes())
-        self.stackedWidget.addWidget(Rifas())
+
+
 
 
     def display(self, index):
