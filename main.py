@@ -6,7 +6,11 @@ from qt_material import apply_stylesheet
 
 from layouts.layout_clientes import PerfilClientes
 from layouts.layout_venda import Venda
-from layouts.layout_criar import Criar
+from layouts.layout_criar import CriarRifa
+
+#Exibir a lista de rifas ativas
+
+
 
 class CustomQWidget(QWidget):
     def __init__(self, icon, text, parent= None):
@@ -30,21 +34,15 @@ class JanelaPrincipal(QMainWindow):
 
 
         item = QListWidgetItem(self.listWidget)
-        item_widget = CustomQWidget("+","Criar")
+        item_widget = CustomQWidget("+","Rifas Ativas")
         item.setSizeHint(item_widget.sizeHint())
         self.listWidget.insertItem(0,item)
         self.listWidget.setItemWidget(item, item_widget)
 
         item = QListWidgetItem(self.listWidget)
-        item_widget = CustomQWidget("+","Rifas Ativas")
-        item.setSizeHint(item_widget.sizeHint())
-        self.listWidget.insertItem(1,item)
-        self.listWidget.setItemWidget(item, item_widget)
-
-        item = QListWidgetItem(self.listWidget)
         item_widget = CustomQWidget("+","Clientes")
         item.setSizeHint(item_widget.sizeHint())
-        self.listWidget.insertItem(2,item)
+        self.listWidget.insertItem(1,item)
         self.listWidget.setItemWidget(item, item_widget)
 
 
@@ -56,7 +54,6 @@ class JanelaPrincipal(QMainWindow):
 
 
     def carregaJanelas(self):
-        self.stackedWidget.addWidget(Criar())
         self.stackedWidget.addWidget(Venda())
         self.stackedWidget.addWidget(PerfilClientes())
 

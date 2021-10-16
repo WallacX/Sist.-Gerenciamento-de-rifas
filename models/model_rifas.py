@@ -2,6 +2,41 @@ from componentes.rifa import Rifa
 import database.conexao as db
 
 
+
+def addRifa(rifa):
+    conn = db.conexao()
+    cursor = conn.cursor()
+    sql = "INSERT INTO Rifas (premio, qtd_num, status)VALUES (?,?,?);"
+    cursor.execute(sql, [rifa.premio, rifa.qtd_num, rifa.status])
+    conn.commit()
+    conn.close()
+
+
+def FinalizaRifa(rifa):
+    conn = db.conexao()
+    cursor = conn.cursor()
+    sql = "UPDATE Rifas SET premio=?, qtd_num=?, status='FINALIZADA' WHERE id=?"
+    cursor.execute(sql, [rifa.premio, rifa.qtd_num, rifa.status, rifa.id])
+    conn.commit()
+    conn.close()
+
+
+
+def getAtivas():
+    conn = db.conexao()
+    cursor = conn.cursor()
+    cursor.execute("SELECT premio FROM Rifas WHERE status = 'ATIVA';")
+    lista_rifas = []
+
+    for x in cursor.fetchall():
+        premio = x[1]
+        rifa = Rifa(premio)
+        lista_rifas.append(rifa)
+    conn.close()
+    return lista_rifas
+
+
+
 def getRifas():
     conn = db.conexao()
     cursor = conn.cursor()
@@ -18,8 +53,7 @@ def getRifas():
     conn.close()
     return lista_rifas
 
-
-def getRifas(id):
+def getRifa(id):
     conn = db.conexao()
     cursor = conn.cursor()
     sql = "SELECT * FROM Rifas WHERE ID = ?;"
@@ -32,25 +66,6 @@ def getRifas(id):
     rifa = Rifa(id, premio, qtd_num, status)
     conn.close()
     return rifa
-
-
-def addRifa(rifa):
-    conn = db.conexao()
-    cursor = conn.cursor()
-    sql = "INSERT INTO Rifas (premio, qtd_num, status)VALUES (?,?,?);"
-    cursor.execute(sql, [rifa.premio, rifa.qtd_num, rifa.status])
-    conn.commit()
-    conn.close()
-
-
-def editRifa(rifa):
-    conn = db.conexao()
-    cursor = conn.cursor()
-    sql = "UPDATE Rifas SET premio=?, qtd_num=?, status=? WHERE id=?"
-    cursor.execute(sql, [rifa.premio, rifa.qtd_num, rifa.status, rifa.id])
-    conn.commit()
-    conn.close()
-
 
 def delRifa(id):
     conn = db.conexao()

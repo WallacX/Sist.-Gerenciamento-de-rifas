@@ -37,7 +37,7 @@ class TabelaRifas(QTableWidget):
         # seleciona toda a linha
         self.setSelectionBehavior(QTableWidget.SelectRows)#possivelmete vai precisar editar
         # evento ao selecionar uma linha
-        #self.clicked.connect(self.on_click)
+        '''self.clicked.connect(self.on_click)'''
 
 
 

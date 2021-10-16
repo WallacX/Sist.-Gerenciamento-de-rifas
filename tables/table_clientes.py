@@ -14,7 +14,6 @@ class TabelaClientes:
         self.cliente = None
 
 
-
         self.configTable()
         self.tableWidget.setRowCount(0)
 

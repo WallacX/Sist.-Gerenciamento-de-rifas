@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>369</width>
-    <height>293</height>
+    <width>477</width>
+    <height>272</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout_3">
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="novo_btn">
        <property name="text">
         <string>Nova Rifa</string>
        </property>
@@ -69,7 +69,7 @@
           </layout>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_3">
+          <widget class="QPushButton" name="add_cliente">
            <property name="text">
             <string>Tem q ter um botão pra por o cliente</string>
            </property>
@@ -82,9 +82,9 @@
        <widget class="QTableWidget" name="tableWidget"/>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="finaliza_btn">
         <property name="text">
-         <string>Encerrar</string>
+         <string>Finalizar</string>
         </property>
        </widget>
       </item>
