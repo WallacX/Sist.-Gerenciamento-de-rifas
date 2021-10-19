@@ -6,9 +6,10 @@ from qt_material import apply_stylesheet
 
 from layouts.layout_clientes import PerfilClientes
 from layouts.layout_venda import Venda
-from layouts.layout_criar import CriarRifa
 
-#Exibir a lista de rifas ativas
+
+#Atualizar a pagina
+#Botão estou com sorte (te diz um numero aleatorio ainda nao comprado)
 
 
 
@@ -46,8 +47,6 @@ class JanelaPrincipal(QMainWindow):
         self.listWidget.setItemWidget(item, item_widget)
 
 
-
-
         self.listWidget.setCurrentRow(0)
         self.carregaJanelas()
         self.listWidget.currentRowChanged.connect(self.display)
@@ -56,7 +55,6 @@ class JanelaPrincipal(QMainWindow):
     def carregaJanelas(self):
         self.stackedWidget.addWidget(Venda())
         self.stackedWidget.addWidget(PerfilClientes())
-
 
 
 

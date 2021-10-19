@@ -11,12 +11,12 @@ class Venda(QWidget):
         super(). __init__()
         uic.loadUi("ui/venda.ui",self)
 
-        
+        self.listaVendas = ListaRifas(self.listWidget, self)
         self.setEventos()
 
     def setEventos(self):
         self.novo_btn.clicked.connect(self.redirecionar)
-        self.tabelaClientes = ListaRifas(self.listWidget, self)
+
 
     def redirecionar(self):
         self.w = CriarRifa()

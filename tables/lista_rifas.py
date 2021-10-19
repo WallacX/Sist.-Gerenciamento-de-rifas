@@ -10,19 +10,10 @@ class ListaRifas:
         self.listWidget = listWidget
         self.parent = parent
 
-        self.configList()
-
 
         self.carregaDados()
 
-    def configList(self):
-        self.listWidget.verticalHeader().setVisible(False)
-        self.listWidget.horizontalHeader().setStretchLastSection(False)
-        self.listWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        self.listWidget.setEditTriggers(QListWidget.NoEditTriggers)
-        self.listWidget.setSelectionBehavior(QListWidget.SelectRows)
-        #self.tableWidget.clicked.connect(self.on_click)
-
-    
     def carregaDados(self):
-        self.listWidget.addItem(RifasModel.getAtivas())
+        lista_rifa = RifasModel.getAtivas()
+        for rifa in lista_rifa:
+            self.listWidget.addItem(rifa)

@@ -21,19 +21,19 @@ def FinalizaRifa(rifa):
     conn.close()
 
 
-
 def getAtivas():
     conn = db.conexao()
     cursor = conn.cursor()
-    cursor.execute("SELECT premio FROM Rifas WHERE status = 'ATIVA';")
+    cursor.execute("SELECT * FROM Rifas WHERE status = 'ATIVA';")
     lista_rifas = []
 
     for x in cursor.fetchall():
         premio = x[1]
-        rifa = Rifa(premio)
-        lista_rifas.append(rifa)
+        lista_rifas.append(premio)
     conn.close()
     return lista_rifas
+
+
 
 
 

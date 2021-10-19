@@ -19,8 +19,6 @@ class CriarRifa(QWidget):
         novaRifa = self.getRifa()
         if novaRifa != None:
             RifasModel.addRifa(novaRifa)
-
-            #self.layout_principal.addWidget(self.table)
             self.limpaCampos()
 
     def getRifa(self):
