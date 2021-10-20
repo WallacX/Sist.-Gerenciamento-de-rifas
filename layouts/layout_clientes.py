@@ -9,12 +9,13 @@ class PerfilClientes(QWidget):
         self.clienteAtual = None
         self.setEventos()
         self.tabelaClientes = TabelaClientes(self.tableWidget, self)
+
     def setEventos(self):
         self.novo_btn.clicked.connect(self.salvarCliente)
         self.limpar_btn.clicked.connect(self.limpaCampos)
-        self.excluir_btn.clicked.connect(self.excluirItem)
-    def salvarCliente(self):
 
+
+    def salvarCliente(self):
         novoCliente = self.getCliente()
         # verifica os campos vazios
         if novoCliente != None:
@@ -42,6 +43,11 @@ class PerfilClientes(QWidget):
     def limpaCampos(self):
         self.clienteAtual = None
         self.nome_line.setText("")
+        self.cpf_line.setText("")
+        self.telefone_line.setText("")
+        self.email_line.setText("")
+        self.novo_btn.setText("Novo Cliente")
+
 
 
 
@@ -55,7 +61,6 @@ class PerfilClientes(QWidget):
 
         # muda o nome do botão para atualizar (já que existe o Contato)
         self.novo_btn.setText("Atualizar")
-        self.excluir_btn.setEnabled(True)
 
     def excluirItem(self):
         self.tabelaClientes.delCliente(self.clienteAtual)

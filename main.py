@@ -8,9 +8,10 @@ from layouts.layout_clientes import PerfilClientes
 from layouts.layout_venda import Venda
 
 
-#Atualizar a pagina
 #Botão estou com sorte (te diz um numero aleatorio ainda nao comprado)
-
+#Quando a nova rifa for criada a pagina deve fechar sozinha
+#Quando a nova rifa for criada deve atualizar a lista
+#bug do botão de excluir
 
 
 class CustomQWidget(QWidget):

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>654</width>
-    <height>514</height>
+    <height>491</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -105,21 +105,14 @@
        <item>
         <widget class="QPushButton" name="limpar_btn">
          <property name="text">
-          <string>Limpar Clientes</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="excluir_btn">
-         <property name="text">
-          <string>excluir</string>
+          <string>Limpar Campos</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="novo_btn">
          <property name="text">
-          <string>Novo </string>
+          <string>Novo Cliente</string>
          </property>
         </widget>
        </item>

@@ -11,13 +11,9 @@ import layouts.layout_clientes as ClientesLayout
 
 class TabelaClientes:
     def __init__(self, tableWidget ,parent):
-
         self.tableWidget = tableWidget
         self.parent = parent
 
-
-
-        self.listaClientes= []
         self.cliente = None
 
         self.listaClientes= []
@@ -30,9 +26,11 @@ class TabelaClientes:
         self.tableWidget.verticalHeader().setVisible(False)
         self.tableWidget.horizontalHeader().setStretchLastSection(False)
         self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.tableWidget.verticalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
         self.tableWidget.setEditTriggers(QTableWidget.NoEditTriggers)
         self.tableWidget.setSelectionBehavior(QTableWidget.SelectRows)
         self.tableWidget.clicked.connect(self.on_click)
+        
     def carregaDados(self):
         self.lista_clientes = ClientesModel.getClientes()
         self.tableWidget.setRowCount(0)
@@ -46,12 +44,13 @@ class TabelaClientes:
         self.carregaDados()
 
     def delCliente(self, cliente):
+        
         ClientesModel.delCliente(cliente.id)
-        # Carrega os dados do banco
 
         self.carregaDados()
 
     def limparClientes(self):
+        
         self.parent.excluir_btn.setEnabled(False)
         self.parent.limpar_btn.setEnabled(False)
 
@@ -113,8 +112,4 @@ class CustomQWidget(QWidget):
 
 
     def remover(self):
-        cliente = self.cliente
-        self.parent.clienteAtual = self.cliente
-        self.parent.delCliente(cliente)
-        self.parent.limparSelecionado()
         self.parent.delCliente(self.cliente)

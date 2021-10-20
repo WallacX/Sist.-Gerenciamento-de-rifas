@@ -35,7 +35,7 @@ class TabelaRifas(QTableWidget):
         # desabilita a edição dos campos
         self.setEditTriggers(QTableWidget.NoEditTriggers)
         # seleciona toda a linha
-        self.setSelectionBehavior(QTableWidget.SelectRows)#possivelmete vai precisar editar
+        self.setSelectionBehavior(QTableWidget.SelectRows)#possivelmete vai precisar editar talvez só tirar o 's' no final de Rows
         # evento ao selecionar uma linha
         '''self.clicked.connect(self.on_click)'''
 

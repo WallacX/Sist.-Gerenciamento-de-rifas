@@ -2,7 +2,6 @@ from componentes.rifa import Rifa
 import database.conexao as db
 
 
-
 def addRifa(rifa):
     conn = db.conexao()
     cursor = conn.cursor()
@@ -34,10 +33,24 @@ def getAtivas():
     return lista_rifas
 
 
+def getRifa(premio):
+    conn = db.conexao()
+    cursor = conn.cursor()
+    sql = "SELECT * FROM Rifas WHERE premio = ?;"
+    cursor.execute(sql, [premio])
+    x = cursor.fetchall()[0]
+    id = x[0]
+    premio = x[1]
+    qtd_num = x[2]
+    status = x[3]
+    rifa = Rifa(id, premio, qtd_num, status)
+    conn.close()
+    return rifa
 
 
 
-def getRifas():
+
+'''def getRifas():
     conn = db.conexao()
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM Rifas;")
@@ -52,25 +65,10 @@ def getRifas():
         lista_rifas.append(rifa)
     conn.close()
     return lista_rifas
-
-def getRifa(id):
-    conn = db.conexao()
-    cursor = conn.cursor()
-    sql = "SELECT * FROM Rifas WHERE ID = ?;"
-    cursor.execute(sql, [id])
-    x = cursor.fetchall()[0]
-    id = x[0]
-    premio = x[1]
-    qtd_num = x[2]
-    status = x[3]
-    rifa = Rifa(id, premio, qtd_num, status)
-    conn.close()
-    return rifa
-
 def delRifa(id):
     conn = db.conexao()
     cursor = conn.cursor()
     sql="DELETE FROM Rifas WHERE id=?"
     cursor.execute(sql, [id])
     conn.commit()
-    conn.close()
+    conn.close()'''
