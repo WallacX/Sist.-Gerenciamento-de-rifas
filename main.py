@@ -5,13 +5,20 @@ from PyQt5 import uic
 from qt_material import apply_stylesheet
 
 from layouts.layout_clientes import PerfilClientes
-from layouts.layout_venda import Venda
+from layouts.layout_venda import NovaVenda
 
+'''self.id = id
+        self.id_rifa = id_rifa
+        self.id_cliente = id_cliente
+        self.numero = numero'''
 
+#definir o 1 item do combobox como /selecione
+#alterar a interface com relação aos botões
+#Criar o sql na parte de vendas e a passagem de informações também
 #Botão estou com sorte (te diz um numero aleatorio ainda nao comprado)
 #Quando a nova rifa for criada a pagina deve fechar sozinha
 #Quando a nova rifa for criada deve atualizar a lista
-#bug do botão de excluir
+#Só chamar o carrega dados novamente
 
 
 class CustomQWidget(QWidget):
@@ -54,9 +61,8 @@ class JanelaPrincipal(QMainWindow):
 
 
     def carregaJanelas(self):
-        self.stackedWidget.addWidget(Venda())
+        self.stackedWidget.addWidget(NovaVenda())
         self.stackedWidget.addWidget(PerfilClientes())
-
 
 
     def display(self, index):
@@ -72,5 +78,3 @@ apply_stylesheet(app, theme = 'dark_teal.xml')
 window = JanelaPrincipal()
 window.show()
 app.exec()
-
-

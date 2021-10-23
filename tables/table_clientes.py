@@ -6,11 +6,11 @@ from PyQt5.QtCore import Qt, QSize, QRect
 from PyQt5.QtCore import QSize
 
 import models.model_clientes as ClientesModel
-import layouts.layout_clientes as ClientesLayout
+
 
 
 class TabelaClientes:
-    def __init__(self, tableWidget ,parent):
+    def __init__(self, tableWidget, parent):
         self.tableWidget = tableWidget
         self.parent = parent
 
@@ -43,14 +43,13 @@ class TabelaClientes:
         ClientesModel.editCliente(cliente)
         self.carregaDados()
 
-    def delCliente(self, cliente):
-        
-        ClientesModel.delCliente(cliente.id)
 
+    def delCliente(self, cliente):
+        ClientesModel.delCliente(cliente.id)
+        self.parent.limpaCampos()
         self.carregaDados()
 
     def limparClientes(self):
-        
         self.parent.excluir_btn.setEnabled(False)
         self.parent.limpar_btn.setEnabled(False)
 
