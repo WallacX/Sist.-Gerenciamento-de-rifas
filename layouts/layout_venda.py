@@ -1,6 +1,10 @@
 from PyQt5.QtWidgets import QWidget
 from PyQt5 import uic
 
+
+from PyQt5.QtWidgets import QHeaderView, QTableWidget, QTableWidgetItem
+
+
 from tables.lista_rifas import ListaRifas
 from layouts.layout_criar import CriarRifa
 from tables.table_rifas import TabelaRifas
@@ -17,14 +21,20 @@ class NovaVenda(QWidget):
         uic.loadUi("ui/venda.ui",self)
 
         self.rifaAtual = None
-        self.id_cliente = None
+        self.clienteAtual= None
         
-        self.listaRifas= ListaRifas(self.listWidget, self)
         self.tabelaRifas = TabelaRifas(self)
         self.layout_principal.addWidget(self.tabelaRifas)
+        
+
+        self.carregaDados()
         self.carregaDadosCliente()
         self.setEventos()
 
+    
+
+    def carregaDados(self):
+        self.listaRifas= ListaRifas(self.listWidget, self)
 
     def setEventos(self):
         self.combo_clientes.currentIndexChanged.connect(self.index_changed_cliente)
@@ -34,7 +44,7 @@ class NovaVenda(QWidget):
 
 
     def redirecionar(self):
-        self.w = CriarRifa()
+        self.w = CriarRifa(self)
         self.w.show()
 
     def insereRifa(self,rifa):
@@ -45,8 +55,10 @@ class NovaVenda(QWidget):
 
 
     def index_changed_cliente(self, x):
-        self.clienteAtual = self.lista_clientes[x]
-        self.id_cliente = self.lista_clientes[x].id
+        if x != 0:
+            self.clienteAtual = self.lista_clientes[x-1]#acho q dps vai ter q tirar esse -1 (dps q eu recriar a tabela)
+        else:
+            self.clienteAtual =  None
 
 
     def carregaDadosCliente(self):
@@ -57,13 +69,14 @@ class NovaVenda(QWidget):
         self.combo_clientes.addItems(lista_combo)
 
 
-
     def comprar(self):
-        id_rifa = self.rifaAtual.id
-        id_cliente = self.id_cliente
-        numero = int(self.numero_line.text())
+        if  self.clienteAtual != None:
+            id_rifa = self.rifaAtual.id
+            id_cliente = self.clienteAtual.id
+            numero = int(self.numero_line.text())
 
-        novaVenda = Venda(-1, id_rifa, id_cliente, numero)
-        RifasModel.addVenda(novaVenda)
+            novaVenda = Venda(-1, id_rifa, id_cliente, numero)
+            RifasModel.addVenda(novaVenda)
+
 
         #self.limparItens()

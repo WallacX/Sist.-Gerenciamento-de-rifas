@@ -7,17 +7,15 @@ from qt_material import apply_stylesheet
 from layouts.layout_clientes import PerfilClientes
 from layouts.layout_venda import NovaVenda
 
-'''self.id = id
-        self.id_rifa = id_rifa
-        self.id_cliente = id_cliente
-        self.numero = numero'''
 
-#definir o 1 item do combobox como /selecione
+
+#proibir a colocação de letras no campo de criação de rifa e desativar o botão tbm
+#verificação se o numero já foi vendido/não poder vender um numero já vendido
 #alterar a interface com relação aos botões
 #Criar o sql na parte de vendas e a passagem de informações também
 #Botão estou com sorte (te diz um numero aleatorio ainda nao comprado)
-#Quando a nova rifa for criada a pagina deve fechar sozinha
-#Quando a nova rifa for criada deve atualizar a lista
+
+#Atualizar a tabela qnd um numero for comprado
 #Só chamar o carrega dados novamente
 
 

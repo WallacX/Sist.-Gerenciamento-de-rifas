@@ -18,6 +18,7 @@ class ListaRifas:
 
 
     def carregaDados(self):
+        self.listWidget.clear()
         self.listaRifas = RifasModel.getAtivas()
         for rifa in self.listaRifas:
             self.listWidget.addItem(rifa.premio)

@@ -36,6 +36,8 @@ class TabelaClientes:
         self.tableWidget.setRowCount(0)
         for cliente in self.lista_clientes:
             self._addRow(cliente)
+
+            
     def addCliente(self, cliente):
         ClientesModel.addCliente(cliente)
         self.carregaDados()

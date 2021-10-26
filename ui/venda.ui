@@ -67,12 +67,20 @@
          </item>
          <item row="2" column="1">
           <widget class="QComboBox" name="combo_clientes">
+           <property name="accessibleDescription">
+            <string>SELECIONE UM CLIENTE</string>
+           </property>
            <property name="editable">
             <bool>false</bool>
            </property>
            <property name="currentText">
-            <string/>
+            <string>SELECIONE UM CLIENTE</string>
            </property>
+           <item>
+            <property name="text">
+             <string>SELECIONE UM CLIENTE</string>
+            </property>
+           </item>
           </widget>
          </item>
         </layout>

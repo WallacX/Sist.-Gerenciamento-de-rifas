@@ -1,19 +1,19 @@
 from PyQt5.QtWidgets import QWidget
 from PyQt5 import uic
 
-from tables.lista_rifas import ListaRifas
+
 from componentes.rifa import Rifa
 import models.model_rifas as RifasModel
 
 
 
-
 class CriarRifa(QWidget):
-    def __init__(self):
+    def __init__(self,parent):
         super(). __init__()
         uic.loadUi("ui/criar.ui",self)
 
-        #self.table = TabelaRifas(self)
+        self.parent = parent
+
         self.setEventos()
 
     def setEventos(self):
@@ -23,10 +23,12 @@ class CriarRifa(QWidget):
         novaRifa = self.getRifa()
         if novaRifa != None:
             RifasModel.addRifa(novaRifa)
-            #defcriar rifa ListaRifas.carregaDados(self)
 
-            #O SISTEMA VAI FECHAR A JANELA AQUI
+
             self.limpaCampos()
+            self.close()
+            self.parent.carregaDados()
+
 
     def getRifa(self):
         if((self.premio_line.text() != "") and (self.qtd_num_line.text() != "")):
