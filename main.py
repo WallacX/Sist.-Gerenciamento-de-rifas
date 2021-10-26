@@ -15,6 +15,7 @@ from layouts.layout_venda import NovaVenda
 #Criar o sql na parte de vendas e a passagem de informações também
 #Botão estou com sorte (te diz um numero aleatorio ainda nao comprado)
 
+
 #Atualizar a tabela qnd um numero for comprado
 #Só chamar o carrega dados novamente
 

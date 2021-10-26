@@ -22,6 +22,8 @@ class TabelaClientes:
         self.configTable()
         self.tableWidget.setRowCount(0)
         self.carregaDados()
+
+
     def configTable(self):
         self.tableWidget.verticalHeader().setVisible(False)
         self.tableWidget.horizontalHeader().setStretchLastSection(False)

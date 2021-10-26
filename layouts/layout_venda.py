@@ -23,16 +23,15 @@ class NovaVenda(QWidget):
         self.rifaAtual = None
         self.clienteAtual= None
         
-        self.tabelaRifas = TabelaRifas(self)
-        self.layout_principal.addWidget(self.tabelaRifas)
-        
+        self.tabelaRifas = TabelaRifas(self.tableWidget, self)
+
 
         self.carregaDados()
         self.carregaDadosCliente()
         self.setEventos()
 
     
-
+#verificar se esse carrega dados é realmente necessario
     def carregaDados(self):
         self.listaRifas= ListaRifas(self.listWidget, self)
 
@@ -48,7 +47,7 @@ class NovaVenda(QWidget):
         self.w.show()
 
     def insereRifa(self,rifa):
-        self.tabelaRifas.setRowCount(0)
+
         self.premio_line.setText(rifa.premio)
         self.tabelaRifas.criaTabela(rifa.qtd_num,rifa.id)
         self.rifaAtual = rifa
@@ -71,12 +70,14 @@ class NovaVenda(QWidget):
 
     def comprar(self):
         if  self.clienteAtual != None:
+            rifa = self.rifaAtual
             id_rifa = self.rifaAtual.id
             id_cliente = self.clienteAtual.id
             numero = int(self.numero_line.text())
 
             novaVenda = Venda(-1, id_rifa, id_cliente, numero)
             RifasModel.addVenda(novaVenda)
+            self.insereRifa(rifa)
 
 
         #self.limparItens()

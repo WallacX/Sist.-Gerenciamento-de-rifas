@@ -2,6 +2,9 @@ from PyQt5.QtWidgets import QWidget
 from PyQt5 import uic
 from tables.table_clientes import TabelaClientes
 from componentes.cliente import Cliente
+
+
+
 class PerfilClientes(QWidget):
     def __init__(self):
         super(). __init__()
