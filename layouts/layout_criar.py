@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget
 from PyQt5 import uic
-
+from PyQt5.QtGui import QRegExpValidator
+from PyQt5.QtCore import QRegExp, QDate
 
 from componentes.rifa import Rifa
 import models.model_rifas as RifasModel
@@ -14,9 +15,14 @@ class CriarRifa(QWidget):
 
         self.parent = parent
 
+
+        self.verifica()
         self.setEventos()
 
+
     def setEventos(self):
+        self.premio_line.textEdited.connect(self.verifica)
+
         self.criar_btn.clicked.connect(self.criarRifa)
 
     def criarRifa(self):
@@ -24,17 +30,20 @@ class CriarRifa(QWidget):
         if novaRifa != None:
             RifasModel.addRifa(novaRifa)
 
-
-            self.limpaCampos()
             self.close()
             self.parent.carregaDados()
 
-
     def getRifa(self):
-        if((self.premio_line.text() != "") and (self.qtd_num_line.text() != "")):
-            return Rifa(-1,self.premio_line.text(), int(self.qtd_num_line.text()) ,"ATIVA")
-        return None
+        if(self.premio_line.text() != ""):
+            return Rifa(-1,self.premio_line.text(), int(self.qtd_num_spin.text()) ,"ATIVA")
+        else:
+            return None
 
-    def limpaCampos(self):
-        self.premio_line.setText("")
-        self.qtd_num_line.setText("")
+
+
+
+    def verifica(self):
+        if(self.premio_line.text() != ""):
+            self.criar_btn.setEnabled(True)
+        else:
+            self.criar_btn.setEnabled(False)

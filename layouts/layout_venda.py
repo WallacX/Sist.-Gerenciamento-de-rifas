@@ -33,12 +33,17 @@ class NovaVenda(QWidget):
     
 #verificar se esse carrega dados é realmente necessario
     def carregaDados(self):
-        self.listaRifas= ListaRifas(self.listWidget, self)
+        self.listaRifas= ListaRifas(self.combo_rifas, self)
+        
+
+
 
     def setEventos(self):
         self.combo_clientes.currentIndexChanged.connect(self.index_changed_cliente)
+        self.combo_rifas.currentIndexChanged.connect(self.listaRifas.on_click)
         self.novo_btn.clicked.connect(self.redirecionar)
         self.compra_btn.clicked.connect(self.comprar)
+        #self.premio_line.textEdited.connect(self.verifica)
         #self.finaliza_btn.clicked.connect(self.finalizar)
 
 

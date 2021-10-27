@@ -8,17 +8,21 @@ class ListaRifas:
         self.listaRifas = []
 
         self.carregaDados()
-        self.listWidget.clicked.connect(self.on_click)
+        #self.listWidget.clicked.connect(self.on_click)
 
 
-    def on_click(self):
-        selected_row = self.listWidget.currentRow() #linha selecionada
-        rifa = self.listaRifas[selected_row]
+    def on_click(self,x):
+        rifa = self.listaRifas[x]
         self.parent.insereRifa(rifa)
 
 
     def carregaDados(self):
-        self.listWidget.clear()
         self.listaRifas = RifasModel.getAtivas()
+        lista_combo = []
         for rifa in self.listaRifas:
-            self.listWidget.addItem(rifa.premio)
+            lista_combo.append(rifa.premio)
+        self.listWidget.addItems(lista_combo)
+
+
+
+    

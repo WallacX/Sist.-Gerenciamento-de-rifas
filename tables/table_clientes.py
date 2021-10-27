@@ -32,7 +32,8 @@ class TabelaClientes:
         self.tableWidget.setEditTriggers(QTableWidget.NoEditTriggers)
         self.tableWidget.setSelectionBehavior(QTableWidget.SelectRows)
         self.tableWidget.clicked.connect(self.on_click)
-        
+    
+    
     def carregaDados(self):
         self.lista_clientes = ClientesModel.getClientes()
         self.tableWidget.setRowCount(0)

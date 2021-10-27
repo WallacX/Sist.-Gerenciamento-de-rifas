@@ -50,7 +50,7 @@ class TabelaRifas(QTableWidget):
                 i = QTableWidgetItem(str(numero) + "-" + nome)
                 self.tableWidget.setItem(linha,coluna-1 , i)
 
-                print(numero,linha,coluna)
+
 
 
 

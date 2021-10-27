@@ -12,14 +12,17 @@ from layouts.layout_venda import NovaVenda
 #proibir a colocação de letras no campo de criação de rifa e desativar o botão tbm
 #verificação se o numero já foi vendido/não poder vender um numero já vendido
 #alterar a interface com relação aos botões
+
 #Criar o sql na parte de vendas e a passagem de informações também
 #Botão estou com sorte (te diz um numero aleatorio ainda nao comprado)
+#fazer um on_click da tabela de rifas
 
 
 #Atualizar a tabela qnd um numero for comprado
 #Só chamar o carrega dados novamente
 
-
+#apagar aas rifas
+#definir tamanho criar.ui
 class CustomQWidget(QWidget):
     def __init__(self, icon, text, parent= None):
         super(CustomQWidget, self).__init__(parent)
