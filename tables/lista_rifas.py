@@ -11,13 +11,17 @@ class ListaRifas:
 
 
     def on_click(self,x):
-        rifa = self.listaRifas[x]
+        print([x])
+        rifa = self.listaRifas[x-1]
         self.parent.insereRifa(rifa)
+        self.parent.verifica()
 
 
     def carregaDados(self):
+        self.listWidget.clear()
         self.listaRifas = RifasModel.getAtivas()
         lista_combo = []
+        lista_combo.append("SELECIONE UMA RIFA")
         for rifa in self.listaRifas:
             lista_combo.append(rifa.premio)
         self.listWidget.addItems(lista_combo)

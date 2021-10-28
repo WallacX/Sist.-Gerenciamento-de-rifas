@@ -4,10 +4,10 @@ from PyQt5 import uic
 from componentes.rifa import Rifa
 import models.model_rifas as RifasModel
 
-
+from tables.lista_rifas import ListaRifas
 
 class CriarRifa(QWidget):
-    def __init__(self,parent):
+    def __init__(self, parent):
         super(). __init__()
         uic.loadUi("ui/criar.ui",self)
 
@@ -27,16 +27,16 @@ class CriarRifa(QWidget):
         if novaRifa != None:
             RifasModel.addRifa(novaRifa)
 
+
+            self.parent.listaRifas.carregaDados()
+            self.parent.tableWidget.setRowCount(0)
             self.close()
-            self.parent.carregaDados()
 
     def getRifa(self):
         if(self.premio_line.text() != ""):
             return Rifa(-1,self.premio_line.text(), int(self.qtd_num_spin.text()) ,"ATIVA")
         else:
             return None
-
-
 
 
     def verifica(self):

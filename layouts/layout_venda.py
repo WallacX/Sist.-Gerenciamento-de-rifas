@@ -32,20 +32,21 @@ class NovaVenda(QWidget):
         self.numero_line.setValidator(qtd_validator)
 
 
-
         self.carregaDadosCliente()
         self.setEventos()
 
 
     def setEventos(self):
+        self.compra_btn.setEnabled(False)
         self.numero_line.textEdited.connect(self.verifica)
         self.combo_clientes.currentIndexChanged.connect(self.index_changed_cliente)
         self.combo_rifas.currentIndexChanged.connect(self.listaRifas.on_click)
         self.novo_btn.clicked.connect(self.redirecionar)
         self.compra_btn.clicked.connect(self.comprar)
+        self.finaliza_btn.clicked.connect(self.finalizar)
 
-        #self.finaliza_btn.clicked.connect(self.finalizar)
-
+    def atualiza(self):
+        self.combo_rifas.currentIndexChanged.connect(self.listaRifas.carregaDados)
 
     def redirecionar(self):
         self.w = CriarRifa(self)
@@ -61,6 +62,7 @@ class NovaVenda(QWidget):
             self.clienteAtual = self.lista_clientes[x-1]#acho q dps vai ter q tirar esse -1 (dps q eu recriar a tabela)
         else:
             self.clienteAtual =  None
+
 
 
     def carregaDadosCliente(self):
@@ -81,37 +83,42 @@ class NovaVenda(QWidget):
             novaVenda = Venda(-1, id_rifa, id_cliente, numero)
             RifasModel.addVenda(novaVenda)
             self.insereRifa(rifa)
+            self.verifica()
+
+
+    def finalizar(self):
+        return None
+
 
 
     def verifica(self):
-        if self.numero_line.text() == "":
-                self.numero_line.setText("0")
 
 
         if self.rifaAtual == None:
             self.avisos_label.setText("Selecione uma rifa")
-
+            self.compra_btn.setEnabled(False)
         elif self.clienteAtual == None:
             self.avisos_label.setText("Selecione um cliente")
+            self.compra_btn.setEnabled(False)
+        elif self.numero_line.text() != (""):
+            self.avisos_label.setText("Digite um número")
 
-        elif int(self.numero_line.text()) > self.rifaAtual.qtd_num:
 
-            self.avisos_label.setText("O número digitado é maior que a quantidade de números da tabela")
+        if self.rifaAtual != None  and  self.numero_line.text() != (""):
+            if int(self.numero_line.text()) > self.rifaAtual.qtd_num:
+                self.avisos_label.setText("O número digitado é maior que a quantidade de números da tabela")
+                self.compra_btn.setEnabled(False)
 
-        #'''elif int(self.numero_line.text()) > self.rifaAtual.qtd_num:
-            #x = self.rifaAtual.qtd_num
-            #self.numero_line.setText("",x)'''
-            #se o numero for maior, deve mudar para o maximo da rifa
+            elif self.rifaAtual != None and self.clienteAtual != None and self.numero_line.text() != (""):
+                numero = int(self.numero_line.text())
+                lista = RifasModel.verificaVenda(self.rifaAtual.id)
 
-        else:
-            self.avisos_label.setText("")
+                for x in lista:
+                    if numero == x[0] or self.numero_line.text() == "0":
+                        self.avisos_label.setText("Este número já foi comprado")
+                        self.compra_btn.setEnabled(False)
 
-            numero = int(self.numero_line.text())
-            lista = RifasModel.verificaVenda(self.rifaAtual.id)
 
-            for x in lista:
-
-                if numero == x[0] or self.numero_line.text() == "0":
-                    self.compra_btn.setEnabled(False)
-                else:
-                    self.compra_btn.setEnabled(True)
+                    else:
+                        self.avisos_label.setText("")
+                        self.compra_btn.setEnabled(True)

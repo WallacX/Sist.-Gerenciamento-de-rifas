@@ -75,7 +75,29 @@ def verificaVenda(id_rifa):
 
 
 
+def getFinalizadas():
+    conn = db.conexao()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM Rifas WHERE status = 'FINALIZADA';")
+    lista_rifas = []
+    for x in cursor.fetchall():
+        id = x[0]
+        premio = x[1]
+        qtd_num = x[2]
+        status = x[3]
+        rifa = Rifa(id, premio, qtd_num, status)
+        lista_rifas.append(rifa)
+    conn.close()
+    return lista_rifas
 
+
+def delRifa(id):
+    conn = db.conexao()
+    cursor = conn.cursor()
+    sql="DELETE FROM Rifas WHERE id=?"
+    cursor.execute(sql, [id])
+    conn.commit()
+    conn.close()
 
 '''
 def getRifas():
@@ -93,10 +115,4 @@ def getRifas():
         lista_rifas.append(rifa)
     conn.close()
     return lista_rifas
-def delRifa(id):
-    conn = db.conexao()
-    cursor = conn.cursor()
-    sql="DELETE FROM Rifas WHERE id=?"
-    cursor.execute(sql, [id])
-    conn.commit()
-    conn.close()'''
+'''

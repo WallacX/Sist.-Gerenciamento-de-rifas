@@ -6,6 +6,7 @@ from qt_material import apply_stylesheet
 
 from layouts.layout_clientes import PerfilClientes
 from layouts.layout_venda import NovaVenda
+from layouts.layout_finalizadas import RifasFinalizadas
 #linha 14 menu.ui
 
 #verificação se o numero já foi vendido/não poder vender um numero já vendido
@@ -58,6 +59,12 @@ class JanelaPrincipal(QMainWindow):
         self.listWidget.insertItem(1,item)
         self.listWidget.setItemWidget(item, item_widget)
 
+        item = QListWidgetItem(self.listWidget)
+        item_widget = CustomQWidget("+","Rifas Finalizadas")
+        item.setSizeHint(item_widget.sizeHint())
+        self.listWidget.insertItem(1,item)
+        self.listWidget.setItemWidget(item, item_widget)
+
 
         self.listWidget.setCurrentRow(0)
         self.carregaJanelas()
@@ -67,6 +74,8 @@ class JanelaPrincipal(QMainWindow):
     def carregaJanelas(self):
         self.stackedWidget.addWidget(NovaVenda())
         self.stackedWidget.addWidget(PerfilClientes())
+        self.stackedWidget.addWidget(RifasFinalizadas())
+
 
 
     def display(self, index):
@@ -81,4 +90,5 @@ apply_stylesheet(app, theme = 'dark_teal.xml')
 
 window = JanelaPrincipal()
 window.show()
+
 app.exec()
