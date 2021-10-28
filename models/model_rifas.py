@@ -10,6 +10,7 @@ def addRifa(rifa):
     conn.commit()
     conn.close()
 
+
 def getAtivas():
     conn = db.conexao()
     cursor = conn.cursor()
@@ -38,6 +39,7 @@ def addVenda(venda):
 
     conn.close
 
+
 def FinalizaRifa(rifa):
     conn = db.conexao()
     cursor = conn.cursor()
@@ -45,6 +47,7 @@ def FinalizaRifa(rifa):
     cursor.execute(sql, [rifa.premio, rifa.qtd_num, rifa.status, rifa.id])
     conn.commit()
     conn.close()
+
 
 def getClienteNum(id_rifa):
     conn = db.conexao()
@@ -58,23 +61,24 @@ def getClienteNum(id_rifa):
     return lista_clientes
 
 
-
-#não está sendo usado
-'''def getRifa(premio):
+def verificaVenda(id_rifa):
     conn = db.conexao()
     cursor = conn.cursor()
-    sql = "SELECT * FROM Rifas WHERE premio = ?;"
-    cursor.execute(sql, [premio])
-    x = cursor.fetchall()[0]
-    id = x[0]
-    premio = x[1]
-    qtd_num = x[2]
-    status = x[3]
-    rifa = Rifa(id, premio, qtd_num, status)
+    sql ="SELECT numero FROM Vendas WHERE id_rifa = ?"
+    cursor.execute(sql,[id_rifa])
+    lista_num = []
+    for x in cursor.fetchall():
+        lista_num.append(x)
     conn.close()
-    return rifa
+    return lista_num
+
+
+
+
+
+
 '''
-'''def getRifas():
+def getRifas():
     conn = db.conexao()
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM Rifas;")

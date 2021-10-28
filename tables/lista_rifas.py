@@ -8,7 +8,6 @@ class ListaRifas:
         self.listaRifas = []
 
         self.carregaDados()
-        #self.listWidget.clicked.connect(self.on_click)
 
 
     def on_click(self,x):
@@ -22,7 +21,3 @@ class ListaRifas:
         for rifa in self.listaRifas:
             lista_combo.append(rifa.premio)
         self.listWidget.addItems(lista_combo)
-
-
-
-    

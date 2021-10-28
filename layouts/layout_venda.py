@@ -3,7 +3,8 @@ from PyQt5 import uic
 
 
 from PyQt5.QtWidgets import QHeaderView, QTableWidget, QTableWidgetItem
-
+from PyQt5.QtGui import QRegExpValidator
+from PyQt5.QtCore import QRegExp, QDate
 
 from tables.lista_rifas import ListaRifas
 from layouts.layout_criar import CriarRifa
@@ -24,26 +25,25 @@ class NovaVenda(QWidget):
         self.clienteAtual= None
         
         self.tabelaRifas = TabelaRifas(self.tableWidget, self)
+        self.listaRifas= ListaRifas(self.combo_rifas, self)
 
 
-        self.carregaDados()
+        qtd_validator = QRegExpValidator(QRegExp('^[1-9]{1}[0-9]{3}$'), self.numero_line)
+        self.numero_line.setValidator(qtd_validator)
+
+
+
         self.carregaDadosCliente()
         self.setEventos()
 
-    
-#verificar se esse carrega dados é realmente necessario
-    def carregaDados(self):
-        self.listaRifas= ListaRifas(self.combo_rifas, self)
-        
-
-
 
     def setEventos(self):
+        self.numero_line.textEdited.connect(self.verifica)
         self.combo_clientes.currentIndexChanged.connect(self.index_changed_cliente)
         self.combo_rifas.currentIndexChanged.connect(self.listaRifas.on_click)
         self.novo_btn.clicked.connect(self.redirecionar)
         self.compra_btn.clicked.connect(self.comprar)
-        #self.premio_line.textEdited.connect(self.verifica)
+
         #self.finaliza_btn.clicked.connect(self.finalizar)
 
 
@@ -52,8 +52,6 @@ class NovaVenda(QWidget):
         self.w.show()
 
     def insereRifa(self,rifa):
-
-        self.premio_line.setText(rifa.premio)
         self.tabelaRifas.criaTabela(rifa.qtd_num,rifa.id)
         self.rifaAtual = rifa
 
@@ -74,7 +72,7 @@ class NovaVenda(QWidget):
 
 
     def comprar(self):
-        if  self.clienteAtual != None:
+        if self.clienteAtual != None:
             rifa = self.rifaAtual
             id_rifa = self.rifaAtual.id
             id_cliente = self.clienteAtual.id
@@ -85,4 +83,35 @@ class NovaVenda(QWidget):
             self.insereRifa(rifa)
 
 
-        #self.limparItens()
+    def verifica(self):
+        if self.numero_line.text() == "":
+                self.numero_line.setText("0")
+
+
+        if self.rifaAtual == None:
+            self.avisos_label.setText("Selecione uma rifa")
+
+        elif self.clienteAtual == None:
+            self.avisos_label.setText("Selecione um cliente")
+
+        elif int(self.numero_line.text()) > self.rifaAtual.qtd_num:
+
+            self.avisos_label.setText("O número digitado é maior que a quantidade de números da tabela")
+
+        #'''elif int(self.numero_line.text()) > self.rifaAtual.qtd_num:
+            #x = self.rifaAtual.qtd_num
+            #self.numero_line.setText("",x)'''
+            #se o numero for maior, deve mudar para o maximo da rifa
+
+        else:
+            self.avisos_label.setText("")
+
+            numero = int(self.numero_line.text())
+            lista = RifasModel.verificaVenda(self.rifaAtual.id)
+
+            for x in lista:
+
+                if numero == x[0] or self.numero_line.text() == "0":
+                    self.compra_btn.setEnabled(False)
+                else:
+                    self.compra_btn.setEnabled(True)

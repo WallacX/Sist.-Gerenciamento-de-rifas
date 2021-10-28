@@ -1,7 +1,5 @@
 from PyQt5.QtWidgets import QWidget
 from PyQt5 import uic
-from PyQt5.QtGui import QRegExpValidator
-from PyQt5.QtCore import QRegExp, QDate
 
 from componentes.rifa import Rifa
 import models.model_rifas as RifasModel
@@ -15,14 +13,13 @@ class CriarRifa(QWidget):
 
         self.parent = parent
 
-
         self.verifica()
+
         self.setEventos()
 
 
     def setEventos(self):
         self.premio_line.textEdited.connect(self.verifica)
-
         self.criar_btn.clicked.connect(self.criarRifa)
 
     def criarRifa(self):

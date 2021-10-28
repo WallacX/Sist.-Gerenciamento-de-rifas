@@ -6,22 +6,24 @@ from qt_material import apply_stylesheet
 
 from layouts.layout_clientes import PerfilClientes
 from layouts.layout_venda import NovaVenda
+#linha 14 menu.ui
 
-
-
-#proibir a colocação de letras no campo de criação de rifa e desativar o botão tbm
 #verificação se o numero já foi vendido/não poder vender um numero já vendido
-#alterar a interface com relação aos botões
-
-#Criar o sql na parte de vendas e a passagem de informações também
-#Botão estou com sorte (te diz um numero aleatorio ainda nao comprado)
-#fazer um on_click da tabela de rifas
+#limitar o numero digitado ao maximo de numeros na rifa
 
 
-#Atualizar a tabela qnd um numero for comprado
-#Só chamar o carrega dados novamente
+#alterar a interface com relação aos botões na ui.clientes  na ui.vendas
 
-#apagar aas rifas
+
+#Botão estou com sorte (te diz um numero aleatorio ainda nao comprado)?
+#fazer um on_click da tabela de rifas?
+
+#acho q na hr da verificaçao do n vai ter q passar o numero da rifa, adicionar todos 
+#os numeros vendidos dessa rifa numa lista e ver se tem algum numero igual ao digitado
+
+#criar a parte de escolher o numero sorteado
+
+#apagar as rifas
 #definir tamanho criar.ui
 class CustomQWidget(QWidget):
     def __init__(self, icon, text, parent= None):

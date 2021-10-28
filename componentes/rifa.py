@@ -4,3 +4,4 @@ class Rifa:
         self.premio = premio
         self.qtd_num= qtd_num
         self.status= status
+        
